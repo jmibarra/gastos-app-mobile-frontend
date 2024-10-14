@@ -1,3 +1,4 @@
+import { MiniTable } from "@/components/periods/Table";
 import React from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 
@@ -13,23 +14,6 @@ const mockData = {
   ],
   savings: 200,
 };
-
-const MiniTable = ({ title, data }) => (
-  <View style={styles.tableContainer}>
-    <Text style={styles.tableTitle}>{title}</Text>
-    <FlatList
-      data={data}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => (
-        <View style={styles.row}>
-          <Text>{item.description}</Text>
-          <Text>{`$${item.amount}`}</Text>
-        </View>
-      )}
-      ListEmptyComponent={<Text>No data</Text>}
-    />
-  </View>
-);
 
 const PeriodOverview = () => {
   return (
@@ -56,19 +40,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 10,
-  },
-  tableContainer: {
-    marginBottom: 20,
-  },
-  tableTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 5,
-  },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 5,
   },
   savingsContainer: {
     marginTop: 10,
