@@ -1,5 +1,6 @@
 import { MiniTable } from "@/components/periods/Table";
-import React from "react";
+import { AuthContext } from "@/context/AuthContext";
+import React, { useContext } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 
 const mockData = {
@@ -16,9 +17,18 @@ const mockData = {
 };
 
 const PeriodOverview = () => {
+  const { user } = useContext(AuthContext)!;
+
   return (
     <View style={styles.container}>
       <Text style={styles.periodTitle}>{mockData.period}</Text>
+
+      {user && (
+        <Text style={styles.savingsText}>
+          Nombre de usuario: {user.username}
+        </Text>
+      )}
+      {user && <Text style={styles.savingsText}>Id: {user.id}</Text>}
 
       <MiniTable title="Gastos" data={mockData.expenses} />
       <MiniTable title="Ingresos" data={mockData.income} />

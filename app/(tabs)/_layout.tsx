@@ -1,7 +1,17 @@
 import { Tabs } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import LoginScreen from "@/screens/LoginScreen";
+import { useContext } from "react";
+import { AuthContext } from "@/context/AuthContext";
 
 export default function TabLayout() {
+  const { user } = useContext(AuthContext)!;
+
+  if (!user) {
+    // Si no hay usuario autenticado, mostrar la pantalla de login
+    return <LoginScreen />;
+  }
+
   return (
     <Tabs
       screenOptions={{
