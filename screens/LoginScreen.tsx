@@ -3,12 +3,12 @@ import React, { useContext, useState } from "react";
 import {
   View,
   TextInput,
-  Button,
   Text,
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
 import { AuthContext } from "../context/AuthContext";
+import { BASE_URL } from "../config";
 
 export default function LoginScreen() {
   const { login } = useContext(AuthContext)!;
@@ -19,16 +19,13 @@ export default function LoginScreen() {
     const values = { email, password };
     console.log(values);
     try {
-      const response = await fetch(
-        "https://e74a-186-153-252-75.ngrok-free.app/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        }
-      );
+      const response = await fetch(`${BASE_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
 
       const data = await response.json();
 
