@@ -1,10 +1,13 @@
+import React, { useContext, useState } from "react";
+import { View, TouchableOpacity } from "react-native";
 import { MiniTable } from "@/components/periods/Table";
 import { AuthContext } from "@/context/AuthContext";
-import React, { useContext } from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import moment from "moment";
+import { Text } from "@/components/ui/text";
+import { Box } from "@/components/ui/box";
+import { Center } from "@/components/ui/center";
 
 const mockData = {
-  period: "Octubre 2024",
   expenses: [
     { id: "1", description: "Compra supermercado", amount: 100 },
     { id: "2", description: "Pago luz", amount: 50 },
@@ -18,48 +21,31 @@ const mockData = {
 
 const PeriodOverview = () => {
   const { user } = useContext(AuthContext)!;
+  const [selectedPeriod, setSelectedPeriod] = useState("Octubre 2024");
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.periodTitle}>{mockData.period}</Text>
-
-      {user && (
-        <Text style={styles.savingsText}>
-          Nombre de usuario: {user.username}
-        </Text>
-      )}
-      {user && <Text style={styles.savingsText}>Id: {user.id}</Text>}
-
-      <MiniTable title="Gastos" data={mockData.expenses} />
-      <MiniTable title="Ingresos" data={mockData.income} />
-
-      <View style={styles.savingsContainer}>
-        <Text
-          style={styles.savingsText}
-        >{`Ahorros: $${mockData.savings}`}</Text>
-      </View>
+    <View >
+        <Center>
+            <Box>
+                <TouchableOpacity>
+                    <Text >{selectedPeriod}</Text>
+                </TouchableOpacity>
+            </Box>
+        </Center>
+        <Box>
+            <MiniTable title="Gastos" data={mockData.expenses} />
+        </Box>
+        <Box>
+            <MiniTable title="Ingresos" data={mockData.income} />
+        </Box>
+        <Box>
+            <Text >{`Ahorros: $${mockData.savings}`}</Text>
+        </Box>
+        
+        
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-  },
-  periodTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  savingsContainer: {
-    marginTop: 10,
-    padding: 10,
-    backgroundColor: "#dff0d8",
-  },
-  savingsText: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-});
 
 export default PeriodOverview;

@@ -1,7 +1,8 @@
 import { IExpense } from "@/interfaces/expenses.model";
+import { BASE_URL } from "../config";
 
 export const getExpensesByPeriod = async (period: string, authToken: string): Promise<IExpense[]> => {
-    const url = "http://localhost:8080/expenses/all/";
+    const url = `{BASE_URL}/expenses/period/`;
     const urlWithPeriod = url + period;
 
     const response = await fetch(urlWithPeriod, {
@@ -17,7 +18,7 @@ export const getExpensesByPeriod = async (period: string, authToken: string): Pr
 };
 
 export const getExpensesByCategory = async (category: string, authToken: string): Promise<IExpense[]> => {
-    const url = "http://localhost:8080/expenses/category/";
+    const url = `{BASE_URL}/expenses/category/`;
     const urlWithCategory = url + category;
 
     const response = await fetch(urlWithCategory, {
@@ -33,7 +34,7 @@ export const getExpensesByCategory = async (category: string, authToken: string)
 }
 
 export const deleteExpenseById = async (id: string, authToken: string) => {
-    const url = `http://localhost:8080/expenses/${id}`;
+    const url = `{BASE_URL}/expenses/${id}`;
 
     const response = await fetch(url, {
         method: "DELETE",
@@ -45,7 +46,7 @@ export const deleteExpenseById = async (id: string, authToken: string) => {
 }
 
 export const updateExpenseById = async (id: string, expense: IExpense, authToken: string) => {
-    const url = `http://localhost:8080/expenses/${id}`;
+    const url = `{BASE_URL}/expenses/${id}`;
 
     const response = await fetch(url, {
         method: "PATCH",
@@ -60,7 +61,7 @@ export const updateExpenseById = async (id: string, expense: IExpense, authToken
 }
 
 export const createExpense = async (expense: IExpense, authToken: string) => {
-    const url = "http://localhost:8080/expenses";
+    const url = `{BASE_URL}/expenses`;
 
     const response = await fetch(url, {
         method: "POST",
