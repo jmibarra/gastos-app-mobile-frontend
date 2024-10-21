@@ -6,6 +6,9 @@ import moment from "moment";
 import { Text } from "@/components/ui/text";
 import { Box } from "@/components/ui/box";
 import { Center } from "@/components/ui/center";
+import { Divider } from "@/components/ui/divider";
+import { Heading } from "@/components/ui/heading";
+import { VStack } from "@/components/ui/vstack";
 
 const mockData = {
   expenses: [
@@ -28,19 +31,25 @@ const PeriodOverview = () => {
         <Center>
             <Box>
                 <TouchableOpacity>
-                    <Text >{selectedPeriod}</Text>
+                    <Heading size="2xl">{selectedPeriod}</Heading>
                 </TouchableOpacity>
             </Box>
         </Center>
-        <Box>
-            <MiniTable title="Gastos" data={mockData.expenses} />
-        </Box>
-        <Box>
-            <MiniTable title="Ingresos" data={mockData.income} />
-        </Box>
-        <Box>
-            <Text >{`Ahorros: $${mockData.savings}`}</Text>
-        </Box>
+        <Divider className="my-0.5" />
+        <VStack>
+            <Box>
+                <MiniTable title="Gastos" data={mockData.expenses} />
+            </Box>
+            <Box>
+                <MiniTable title="Ingresos" data={mockData.income} />
+            </Box>
+            <Center>
+                <Box className="px-3 h-8 rounded border">
+                    <Text >{`Ahorros: $${mockData.savings}`}</Text>
+                </Box>
+            </Center>
+        </VStack>
+        
         
         
     </View>
